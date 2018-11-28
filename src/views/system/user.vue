@@ -115,35 +115,6 @@
             </el-col>
           </el-row>
 
-          <el-row :gutter="15">
-            <el-col :span="8" class="content-left"><label>所属部门</label></el-col>
-            <el-col :span="16" class="content-right">
-              <el-select size="small" v-if="dialogType===1 || dialogType===2" placeholder="请选择部门" v-model="dialogBindData.deptId" @change="getSectionsByDeptId">
-                  <el-option
-                  v-for="item in deptDatas"
-                  :key="item.deptId"
-                  :label="item.deptName"
-                  :value="item.deptId">
-                  </el-option>
-              </el-select>
-              <span v-else>{{viewDeptName(dialogBindData.deptId)}}</span>
-            </el-col>
-          </el-row>
-
-          <el-row :gutter="15">
-            <el-col :span="8" class="content-left"><label>所属科室</label></el-col>
-            <el-col :span="16" class="content-right">
-              <el-select size="small" v-if="dialogType===1 || dialogType===2" placeholder="请选择部门" v-model="dialogBindData.sectionId">
-                  <el-option
-                  v-for="item in sectionDatas"
-                  :key="item.sectionId"
-                  :label="item.sectionName"
-                  :value="item.sectionId">
-                  </el-option>
-              </el-select>
-              <span v-else>{{viewSectionName(dialogBindData.sectionId)}}</span>
-            </el-col>
-          </el-row>
 
           <el-row :gutter="15">
             <el-col :span="8" class="content-left"><label>用户名称</label></el-col>
@@ -265,40 +236,6 @@ export default {
   beforeMount() {
     //权限添加 permName，moduleName，permType，permResource，isAvailable，menuName，ranking
     this.getList();
-    this.getDepts();
-    // const respontData = [
-    //   {
-    //     permId: "1",
-    //     permName: "权限名称1",
-    //     moduleName: "模块名称",
-    //     permType: "权限类型",
-    //     permResource: "权限path",
-    //     memo: "",
-    //     isAvailable: 0, //是否可用
-    //     isMeau: 0,
-    //     isMeauShow: 0,
-    //     menuName: "菜单名称", //菜单名称
-    //     level: "",
-    //     parentId: "1-1",
-    //     ranking: 1 //菜单层级
-    //   },
-    //   {
-    //     permId: "2",
-    //     permName: "权限名称2",
-    //     moduleName: "模块名称",
-    //     permType: "权限类型",
-    //     permResource: "权限path",
-    //     memo: "",
-    //     isAvailable: 0, //是否可用
-    //     isMeau: 0,
-    //     isMeauShow: 0,
-    //     menuName: "菜单名称", //菜单名称
-    //     level: "",
-    //     parentId: "3",
-    //     ranking: 1 //菜单层级
-    //   }
-    // ];
-    // this.dataOption = this.$addDelState(respontData);
   },
   mounted() {},
   methods: {
@@ -327,14 +264,7 @@ export default {
       this.$seach.reset(this);
       this.getList();
     },
-    //校验密码
-    // vapwd() {
-    //   debugger;
-    //   var password = document.getElementById("pwd");
-    //   if (password.value.length < 6) {
-    //     alert("密码长度必须大于六位！");
-    //   }
-    // },
+    
     add() {
       this.dialogType = 1;
       this.getRoleList(() => {
@@ -351,18 +281,14 @@ export default {
     edit(data) {
       this.dialogType = 2;
       this.getRoleList(() => {
-        this.getSectionsByDeptId(data.deptId, () => {
-          this.reBindData(data);
-          this.dialogState = true;
-        });
+        this.reBindData(data);
+        this.dialogState = true;
       });
     },
     check(data) {
       this.dialogType = 3;
-      this.getSectionsByDeptId(data.deptId, () => {
-        this.reBindData(data);
-        this.dialogState = true;
-      });
+      this.reBindData(data);
+      this.dialogState = true;
     },
     //获取的列表数据重新绑定到对应模型上面
     reBindData(data) {
@@ -387,9 +313,8 @@ export default {
           this.dialogBindData.password &&
           this.dialogBindData.realName &&
           this.dialogBindData.mobilePhone &&
-          this.dialogBindData.sysRole &&
-          this.dialogBindData.deptId &&
-          this.dialogBindData.sectionId;
+          this.dialogBindData.sysRole
+          
       } else {
         // alert(`编辑${JSON.stringify(this.dialogBindData)}`);
         isSubmitActive =
@@ -398,9 +323,8 @@ export default {
           this.dialogBindData.password &&
           this.dialogBindData.realName &&
           this.dialogBindData.mobilePhone &&
-          this.dialogBindData.sysRole &&
-          this.dialogBindData.deptId &&
-          this.dialogBindData.sectionId;
+          this.dialogBindData.sysRole
+          
       }
       // // 发送添加请求
       if (isSubmitActive) {
@@ -412,7 +336,6 @@ export default {
         } else {
           this.submmitSuccess = true;
           system.addOrEditSysUser(this.dialogBindData).then(res => {
-            debugger
             if (res.data.code == 1) {
               this.getList(() => {
                 this.$message({

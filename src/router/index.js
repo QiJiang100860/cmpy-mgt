@@ -31,17 +31,6 @@ export const constantRouterMap = [
   { path: '/login', component: _import('login/index'), hidden: true },
   { path: '/404', component: _import('errorPage/404'), hidden: true },
   { path: '/401', component: _import('errorPage/401'), hidden: true },
-  {
-    path: '', //首页不加
-    component: Layout,
-    redirect: 'home',
-    children: [{
-      path: 'home',
-      component: _import('home/index'),
-      name: 'home',
-      meta: { title: '首页', icon: 'shouye', noCache: true }
-    }]
-  }
 ]
 
 export default new Router({
@@ -51,23 +40,7 @@ export default new Router({
 })
 
 export const asyncRouterMap = [
-  // 车辆管理
-  {
-    path: '/car',
-    alwaysShow:true,
-    component: Layout,
-    redirect: '/car/brandList',
-    meta: {
-      title: '车辆管理',
-      icon: 'cheliang'
-    },
-    children: [
-      { path: 'brandList', component: _import('car/brandList'), name: 'car_brandList', meta: { title: '品牌列表' }},
-      { path: 'seriesList', component: _import('car/seriesList'), name: 'car_seriesList', meta: { title: '车系列表' }},
-      { path: 'yearList', component: _import('car/yearList'), name: 'car_yearList', meta: { title: '年代列表' }},
-      { path: 'carList', component: _import('car/carList'), name: 'car_carList', meta: { title: '车辆列表' }}
-    ]
-  },
+
   // 系统管理
   {
     path: '/system',

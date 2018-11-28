@@ -2,7 +2,7 @@
   <div class="login-container" :style="{backgroundImage:'url(' + bgImg + ')' }">
     <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
       <div class="title-container">
-        <h3 class="title">碑林区智慧大院后台管理系统</h3>
+        <h3 class="title">翔天世纪集团官网管理系统</h3>
       </div>
       <el-form-item prop="username">
         <span class="svg-container svg-container_login">
