@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css" media="print">
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
+        .print-wrapper {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .print-wrapper h1 {
+            text-align: center;
+            font-size: 18px;
+            margin: 0;
+            font-size: 22px;
+            line-height: 40px;
+            letter-spacing: 5px;
+            font-family: "SimSun";
+        }
+
+        .print-wrapper .visit-time {
+            margin-bottom: 4px;
+            box-sizing: border-box;
+            /*padding-left: 15px;*/
+            font-size: 14px;
+            font-family: "SimSun";
+        }
+
+        .ptable {
+            width: 100%;
+            border: solid 1px #333;
+            border-bottom: none;
+            border-right: none;
+            border-spacing: 0px;
+        }
+
+        .ptable td {
+            border-bottom: solid 1px #000;
+            border-right: solid 1px #000;
+            box-sizing: border-box;
+            padding: 5px 0;
+            font-size: 12px;
+            font-family: "SimSun";
+        }
+
+        .ptable .sign-time-wrapper {
+            text-align: right;
+            box-sizing: border-box;
+        }
+
+        .ptable .gov-welcome {
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .ptable .visit-tip {
+            text-align: center;
+        }
+
+        .ptable .title {}
+
+        .ptable .infro {}
+
+        .ptable .sign-time-wrapper span {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body style="padding: 0;margin: 0;height: 100%;width: 100%;">
+    <div id="printBody" style="width: 100%;height: 100%;">
+        <div class="print-wrapper">
+            <h1>会客单</h1>
+            <div class="visit-time" id="visitTime"></div>
+            <table class="ptable">
+                <tr>
+                    <td class="title" style="width: 26%">访客姓名</td>
+                    <td class="infro" id="visitorName" style="text-align: center"></td>
+                    <td class="title">性别</td>
+                    <td class="infro" id="sex" style="text-align: center">男</td>
+                </tr>
+                <tr>
+                    <td>民族</td>
+                    <td id="folk" style="text-align: center">汉</td>
+                    <td>车牌号</td>
+                    <td id="carPlateNo" style="text-align: center"></td>
+                </tr>
+                <tr>
+                    <td>证件号码</td>
+                    <td colspan="3" id="visitorIdCard" style="text-align: center"></td>
+                </tr>
+                <tr>
+                    <td>来访人数</td>
+                    <td id="visitorNum" style="text-align: center"></td>
+                    <td>来访事由</td>
+                    <td id="visitReason" style="text-align: center"></td>
+                </tr>
+                <tr>
+                    <td>被访人姓名</td>
+                    <td id="applyMemberName" style="text-align: center"></td>
+                    <td>被访部门</td>
+                    <td id="applySectionName" style="text-align: center"></td>
+                </tr>
+                <tr>
+                    <td>被访人签名</td>
+                    <td class="sign-time-wrapper" colspan="3" style="line-height: 30px">
+                        <span>时</span>
+                        <span>分</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="gov-welcome" colspan="4" id="applyUnitName"></td>
+                </tr>
+                <tr>
+                    <td class="visit-index">会客单号</td>
+                    <td colspan="3" id="visitorId" style="text-align: center"></td>
+                </tr>
+                <tr>
+                    <td class="visit-tip" colspan="4">请妥善保管，离开时交还门卫</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var parentWindow = window.parent;
+            var inputId = window.location.search.split("=")[1]
+            var printData = JSON.parse(parentWindow.document.getElementById(inputId).value)
+            for (var key in printData) {
+                var ele = $('#' + key)
+                if (ele.length) {
+                    if (key === "visitTime") {
+                        $(ele).text(fattTime(printData[key]))
+                    } else if(key==="sex") {
+                        $(ele).text(printData[key]==="1" ? "男" : "女")
+                    }else{
+                        $(ele).text(printData[key] ? printData[key] : "暂无数据")
+                    }
+
+                }
+            }
+            window.print();
+        })
+
+        function fattTime(time) {
+            var _TIME = new Date(time);
+            var _year = _TIME.getFullYear();
+            var _month = _TIME.getMonth() + 1;
+            var _date = _TIME.getDate();
+            var _hour = _TIME.getHours();
+            var _minutes = _TIME.getMinutes();
+            var _second = _TIME.getSeconds();
+            return _year + "-" + (_month > 9 ? _month : ('0' + _month)) + "-" + (_date > 9 ? _date : ('0' + _date)) + " " + (_hour > 9 ? _hour : ('0' + _hour)) + ":" + (_minutes > 9 ? _minutes : ('0' + _minutes)) + ":" + (_second > 9 ? _second : ('0' + _second));
+
+        }
+
+    </script>
+</body>
+
+</html>
