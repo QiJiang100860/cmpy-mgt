@@ -114,8 +114,6 @@
               <span v-else>{{dialogBindData.sysRole}}</span>
             </el-col>
           </el-row>
-
-
           <el-row :gutter="15">
             <el-col :span="8" class="content-left"><label>用户名称</label></el-col>
             <el-col :span="16" class="content-right">
@@ -236,6 +234,40 @@ export default {
   beforeMount() {
     //权限添加 permName，moduleName，permType，permResource，isAvailable，menuName，ranking
     this.getList();
+    // this.getDepts();
+    // const respontData = [
+    //   {
+    //     permId: "1",
+    //     permName: "权限名称1",
+    //     moduleName: "模块名称",
+    //     permType: "权限类型",
+    //     permResource: "权限path",
+    //     memo: "",
+    //     isAvailable: 0, //是否可用
+    //     isMeau: 0,
+    //     isMeauShow: 0,
+    //     menuName: "菜单名称", //菜单名称
+    //     level: "",
+    //     parentId: "1-1",
+    //     ranking: 1 //菜单层级
+    //   },
+    //   {
+    //     permId: "2",
+    //     permName: "权限名称2",
+    //     moduleName: "模块名称",
+    //     permType: "权限类型",
+    //     permResource: "权限path",
+    //     memo: "",
+    //     isAvailable: 0, //是否可用
+    //     isMeau: 0,
+    //     isMeauShow: 0,
+    //     menuName: "菜单名称", //菜单名称
+    //     level: "",
+    //     parentId: "3",
+    //     ranking: 1 //菜单层级
+    //   }
+    // ];
+    // this.dataOption = this.$addDelState(respontData);
   },
   mounted() {},
   methods: {
@@ -264,7 +296,14 @@ export default {
       this.$seach.reset(this);
       this.getList();
     },
-    
+    //校验密码
+    // vapwd() {
+    //   debugger;
+    //   var password = document.getElementById("pwd");
+    //   if (password.value.length < 6) {
+    //     alert("密码长度必须大于六位！");
+    //   }
+    // },
     add() {
       this.dialogType = 1;
       this.getRoleList(() => {
@@ -281,14 +320,23 @@ export default {
     edit(data) {
       this.dialogType = 2;
       this.getRoleList(() => {
-        this.reBindData(data);
-        this.dialogState = true;
+
+         this.reBindData(data);
+          this.dialogState = true;
+        // this.getSectionsByDeptId(data.deptId, () => {
+        //   this.reBindData(data);
+        //   this.dialogState = true;
+        // });
       });
     },
     check(data) {
       this.dialogType = 3;
       this.reBindData(data);
       this.dialogState = true;
+      // this.getSectionsByDeptId(data.deptId, () => {
+      //   this.reBindData(data);
+      //   this.dialogState = true;
+      // });
     },
     //获取的列表数据重新绑定到对应模型上面
     reBindData(data) {
@@ -313,8 +361,7 @@ export default {
           this.dialogBindData.password &&
           this.dialogBindData.realName &&
           this.dialogBindData.mobilePhone &&
-          this.dialogBindData.sysRole
-          
+          this.dialogBindData.sysRole ;
       } else {
         // alert(`编辑${JSON.stringify(this.dialogBindData)}`);
         isSubmitActive =
@@ -323,8 +370,7 @@ export default {
           this.dialogBindData.password &&
           this.dialogBindData.realName &&
           this.dialogBindData.mobilePhone &&
-          this.dialogBindData.sysRole
-          
+          this.dialogBindData.sysRole;
       }
       // // 发送添加请求
       if (isSubmitActive) {
@@ -336,6 +382,7 @@ export default {
         } else {
           this.submmitSuccess = true;
           system.addOrEditSysUser(this.dialogBindData).then(res => {
+            debugger
             if (res.data.code == 1) {
               this.getList(() => {
                 this.$message({
@@ -424,46 +471,46 @@ export default {
       return fattCreateTime(time);
     },
     // 人员对用的部门
-    getDepts() {
-      system.getDepts().then(res => {
-        if (res.data.code == "1") {
-          this.deptDatas = res.data.data;
-        }
-      });
-    },
+    // getDepts() {
+    //   system.getDepts().then(res => {
+    //     if (res.data.code == "1") {
+    //       this.deptDatas = res.data.data;
+    //     }
+    //   });
+    // },
     // 根据部门id获取科室数据
-    getSectionsByDeptId(id, cb) {
-      this.dialogBindData.sectionId = "";
-      system.getSectionsByDeptId({ deptId: id }).then(res => {
-        if (res.data.code == "1") {
-          this.sectionDatas = res.data.data;
-          cb ? cb() : "";
-        }
-      });
-    },
+    // getSectionsByDeptId(id, cb) {
+    //   this.dialogBindData.sectionId = "";
+    //   system.getSectionsByDeptId({ deptId: id }).then(res => {
+    //     if (res.data.code == "1") {
+    //       this.sectionDatas = res.data.data;
+    //       cb ? cb() : "";
+    //     }
+    //   });
+    // },
     // 回显部门名称
-    viewDeptName(id) {
-      const data = this.deptDatas;
-      for (const item of data) {
-        if (item.deptId == id) {
-          return item.deptName;
-        }
-      }
-    },
+    // viewDeptName(id) {
+    //   const data = this.deptDatas;
+    //   for (const item of data) {
+    //     if (item.deptId == id) {
+    //       return item.deptName;
+    //     }
+    //   }
+    // },
     // 回显科室名称
-    viewSectionName(id) {
-      if (id) {
-        const data = this.sectionDatas;
-        console.log(this.sectionDatas);
-        for (const item of data) {
-          if (item.sectionId == id) {
-            return item.sectionName;
-          }
-        }
-      } else {
-        return "暂无数据";
-      }
-    }
+    // viewSectionName(id) {
+    //   if (id) {
+    //     const data = this.sectionDatas;
+    //     console.log(this.sectionDatas);
+    //     for (const item of data) {
+    //       if (item.sectionId == id) {
+    //         return item.sectionName;
+    //       }
+    //     }
+    //   } else {
+    //     return "暂无数据";
+    //   }
+    // }
   },
   computed: {
     // 激活重置按钮

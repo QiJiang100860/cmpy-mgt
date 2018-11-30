@@ -31,6 +31,17 @@ export const constantRouterMap = [
   { path: '/login', component: _import('login/index'), hidden: true },
   { path: '/404', component: _import('errorPage/404'), hidden: true },
   { path: '/401', component: _import('errorPage/401'), hidden: true },
+  {
+    path: '', //首页不加
+    component: Layout,
+    redirect: 'welcome',
+    children: [{
+      path: 'welcome',
+      component: _import('welcome/index'),
+      name: 'welcome',
+      meta: { title: '欢迎页', icon: 'shezhihuanyingye', noCache: true }
+    }]
+  }
 ]
 
 export default new Router({
@@ -41,23 +52,125 @@ export default new Router({
 
 export const asyncRouterMap = [
 
+
+
+  // 公共配置
+  {
+    path: '/pubInfo',
+    alwaysShow: true,
+    component: Layout,
+    redirect: '/pubInfo/video',
+    meta: {
+      title: '公共配置',
+      icon: 'gonggongpeizhi'
+    },
+    children: [
+      { path: 'videoOrImg', component: _import('pubInfo/videoOrImg'), name: 'home_videoOrImg', meta: { title: '启动页视频' } },
+      { path: 'subCpy', component: _import('pubInfo/subCpy'), name: 'home_subCpy', meta: { title: '子公司列表' } },
+    ]
+  },
+
+  // 首页管理
+  {
+    path: '/home',
+    alwaysShow: true,
+    component: Layout,
+    redirect: '/home/banner',
+    meta: {
+      title: '首页管理',
+      icon: 'shouyepeizhi'
+    },
+    children: [
+      { path: 'banner', component: _import('home/banner'), name: 'home_banner', meta: { title: 'banner管理' } },
+      { path: 'cpyService', component: _import('home/cpyService'), name: 'home_cpyService', meta: { title: '企业服务' } },
+      { path: 'brief', component: _import('home/brief'), name: 'home_brief', meta: { title: '集团简介' } },
+      { path: 'superiority', component: _import('home/superiority'), name: 'home_superiority', meta: { title: '服务优势' } },
+      { path: 'case', component: _import('home/case'), name: 'home_case', meta: { title: '服务案例' } },
+    ]
+  },
+
+
+  // 企业服务
+  {
+    path: '/service',
+    alwaysShow: true,
+    component: Layout,
+    redirect: '/service/list',
+    meta: {
+      title: '企业服务',
+      icon: 'qiyefuwu'
+    },
+    children: [
+      { path: 'list', component: _import('service/list'), name: 'service_list', meta: { title: '企业服务列表' } },
+    ]
+  },
+  // 商务合作
+  {
+    path: '/commerce',
+    alwaysShow: true,
+    component: Layout,
+    redirect: '/commerce/list',
+    meta: {
+      title: '商务合作',
+      icon: 'shangwuhezuo1'
+    },
+    children: [
+      { path: 'list', component: _import('commerce/list'), name: 'commerce_list', meta: { title: '商务合作' } },
+    ]
+  },
+  // 企业文化
+  {
+    path: '/cpyCulture',
+    alwaysShow: true,
+    component: Layout,
+    redirect: '/cpyCulture/imges',
+    meta: {
+      title: '企业文化',
+      icon: 'qiyewenhua'
+    },
+    children: [
+      { path: 'imges', component: _import('cpyCulture/imges'), name: 'cpyCulture_imges', meta: { title: '企业文化图库' } },
+      { path: 'teamList', component: _import('cpyCulture/teamList'), name: 'cpyCulture_teamList', meta: { title: '团队风采' } },
+    ]
+  },
+
+
+
+  // 加入我们
+  {
+    path: '/joinUs',
+    alwaysShow: true,
+    component: Layout,
+    redirect: '/joinUs/imges',
+    meta: {
+      title: '加入我们',
+      icon: 'jiaruwomen'
+    },
+    children: [
+      { path: 'imges', component: _import('joinUs/imges'), name: 'joinUs_imges', meta: { title: '加入我们配置图' } },
+      { path: 'jobList', component: _import('joinUs/jobList'), name: 'joinUs_jobList', meta: { title: '岗位列表' } },
+    ]
+  },
+
+
+
   // 系统管理
   {
     path: '/system',
-    alwaysShow:true,
+    alwaysShow: true,
     component: Layout,
     redirect: '/system/permission',
     meta: {
       title: '系统管理',
-      icon: 'navicon-xtgl'
+      icon: 'xitongguanli'
     },
     children: [
-      { path: 'permission', component: _import('system/permission'), name: 'system_permission', meta: { title: '系统权限' }},
-      { path: 'roles', component: _import('system/roles'), name: 'system_roles', meta: { title: '系统角色' }},
-      { path: 'user', component: _import('system/user'), name: 'system_user', meta: { title: '系统用户' }},
-      { path: 'param', component: _import('system/param'), name: 'system_param', meta: { title: '系统参数' }},
-      { path: 'dataDicFl', component: _import('system/dataDicFl'), name: 'system_dataDicFl', meta: { title: '数据字典分类' }},
-      { path: 'dataDicX', component: _import('system/dataDicX'), name: 'system_dataDicX', meta: { title: '数据字典项' }}
+      { path: 'permission', component: _import('system/permission'), name: 'system_permission', meta: { title: '系统权限' } },
+      { path: 'roles', component: _import('system/roles'), name: 'system_roles', meta: { title: '系统角色' } },
+      { path: 'user', component: _import('system/user'), name: 'system_user', meta: { title: '系统用户' } },
+      { path: 'param', component: _import('system/param'), name: 'system_param', meta: { title: '系统参数' } },
+      { path: 'dataDictCat', component: _import('system/dataDictCat'), name: 'system_dataDictCat', meta: { title: '数据字典分类' } },
+      { path: 'dataDictItem', component: _import('system/dataDictItem'), name: 'system_dataDictItem', meta: { title: '数据字典项' } }
     ]
   },
   { path: '*', redirect: '/404', hidden: true }

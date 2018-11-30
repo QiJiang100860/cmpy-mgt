@@ -51,7 +51,6 @@ export default {
     };
   },
   mounted() {
-    debugger
     if (!this.type && this.dafaultExtend.length) {
       // 单选处理默认值
       this.watchItemIdArr.push(this.dafaultExtend[0]);

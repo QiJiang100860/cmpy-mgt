@@ -6,10 +6,10 @@
 
 <script>
 import '@/styles/index.scss' // global css
-import "./assets/iconfont/iconfont.css";
 export default {
   name: "App"
 };
 </script>
 <style lang="scss">
+@import url('http://at.alicdn.com/t/font_943479_0qymwugoa0ve.css');
 </style>

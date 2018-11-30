@@ -8,20 +8,38 @@ export function getDepsInfo() {
   })
 }
 
-// 获取访问事由列表
-export function getVisitReasons() {
+
+
+/** 
+ * 通用接口
+ * 
+ * advertType
+ * 1、banner 
+ * 2、企业服务 
+ * 3、集团简介
+ * 4、服务优势
+ * 5、服务案例
+ * 6、团队风采
+ * 7、子公司配置
+ * 
+ * 
+ * */ 
+
+export function getAdvertList(data) {
   return request({
-    url: '/common/getVisitReasons',
-    method: 'post'
+    url: '/advert/getAdvertList',
+    method: 'post',
+    data:qs.stringify(data)
   })
 }
 
 
-// 根据科室id查询，人员信息
-export function getMemberListBySection(data) {
+
+
+export function addOrEditAdvert(data) {
   return request({
-      url: '/member/getMemberListBySection',
-      method: 'post',
-      data: qs.stringify(data)
+    url: '/advert/addOrEditAdvert',
+    method: 'post',
+    data:qs.stringify(data)
   })
 }

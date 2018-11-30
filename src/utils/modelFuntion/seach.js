@@ -13,7 +13,6 @@ export const submmit = (ctx, postFun) => {
           param[key] = _this.seacherParam[key]
         }
       }
-      console.log("搜索"+JSON.stringify(param))
       postFun(param).then(res => {
         resolve(res)
       }).catch(() => {
@@ -26,6 +25,9 @@ export const reset = (ctx) => {
   const _this = ctx
   const param = _this.seacherParam
   for (const key in param) {
-    param[key] = null
+    // 添加这个过滤 是为了兼容一个接口
+    if(key!='advertType'){
+      param[key] = null
+    }
   }
 }

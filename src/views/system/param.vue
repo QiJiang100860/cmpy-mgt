@@ -117,7 +117,7 @@
 
         <!-- 查看，编辑dialog -->
         <el-dialog
-        v-elv-dragv-dialog
+        v-el-drag-dialog
         :title="dialogTitle"
         :visible.sync="dialogState"
         width="30%"
