@@ -45,9 +45,9 @@ export default {
 
 
       const fileSize = file.size / 1024 / 1024;
-      if (fileSize > 2) {
+      if (fileSize > 6) {
         this.$message({
-          message: "上传图片不能大于2M",
+          message: "上传图片不能大于6M",
           type: "warning"
         });
       } else {

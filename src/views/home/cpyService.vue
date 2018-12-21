@@ -132,8 +132,8 @@
             <label>服务图片</label>
           </el-col>
           <el-col :span="16" class="content-right">
-            <up-load-img ref="imgComponent" v-if="dialogType===1 || dialogType===2" width="192" height="108" resPath="banner"  :type="dialogType===2" :viewUrl="dialogBindData.advertPicUrl" @emitSuccess="handleImgLoad"></up-load-img>
-            <img v-view-img v-else :src="dialogBindData.advertPicUrl" width="192" height="108">
+            <up-load-img ref="imgComponent" v-if="dialogType===1 || dialogType===2" width="192" height="192" resPath="banner"  :type="dialogType===2" :viewUrl="dialogBindData.advertPicUrl" @emitSuccess="handleImgLoad"></up-load-img>
+            <img v-view-img v-else :src="dialogBindData.advertPicUrl" width="192" height="192">
           </el-col>
         </el-row>
 

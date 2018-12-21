@@ -59,7 +59,6 @@ export default {
       id: "",
       videoUrl: "",
       contentType: "",
-
       loading:true
     };
   },

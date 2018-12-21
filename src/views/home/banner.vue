@@ -127,8 +127,8 @@
             <label>广告图片</label>
           </el-col>
           <el-col :span="16" class="content-right">
-            <up-load-img ref="imgComponent" v-if="dialogType===1 || dialogType===2" width="288" height="78" resPath="banner"  :type="dialogType===2" :viewUrl="dialogBindData.advertPicUrl" @emitSuccess="handleImgLoad"></up-load-img>
-            <img v-view-img v-else :src="dialogBindData.advertPicUrl" width="288" height="78">
+            <up-load-img ref="imgComponent" v-if="dialogType===1 || dialogType===2" width="288" height="160" resPath="banner"  :type="dialogType===2" :viewUrl="dialogBindData.advertPicUrl" @emitSuccess="handleImgLoad"></up-load-img>
+            <img v-view-img v-else :src="dialogBindData.advertPicUrl" width="288" height="160">
           </el-col>
         </el-row>
 
