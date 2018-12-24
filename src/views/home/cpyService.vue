@@ -58,7 +58,7 @@
 
           <el-table-column prop="advertTitle" label="主标题"></el-table-column>
 
-          <el-table-column prop="advertSubtitle" label="副标题"></el-table-column>
+          <el-table-column prop="advertSubtitle" label="服务简介"></el-table-column>
 
           <el-table-column prop="linkUrl" label="服务连接"></el-table-column>
 
@@ -171,7 +171,7 @@
 
         <el-row :gutter="15">
           <el-col :span="8" class="content-left">
-            <label>服务副标题</label>
+            <label>服务简介</label>
           </el-col>
           <el-col :span="16" class="content-right">
             <el-input
@@ -180,7 +180,7 @@
               type="textarea"
               rows="3"
               resize="none"
-              placeholder="请输入服务副标题"
+              placeholder="请输入服务简介"
               v-model="dialogBindData.advertSubtitle"
             ></el-input>
             <span v-else>{{dialogBindData.advertSubtitle}}</span>
