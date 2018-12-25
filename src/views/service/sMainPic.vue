@@ -40,7 +40,8 @@ export default {
   },
   methods: {
     getPagePic(cb) {
-      cpyCulture.getCompanyPicList({companyType:3}).then(res => {
+      cpyCulture.getCompanyPicList({companyType:4}).then(res => {
+        debugger
         const data = res.data.data;
         this.id1 = data[0].companyPicId;
         this.pic1 = data[0].companyPic;
@@ -51,7 +52,7 @@ export default {
       this.pic1 = url;
       const param = {
         companyPicId: this.id1,
-        companyType: 3,
+        companyType: 4,
         companyPic: url
       };
 

@@ -12,11 +12,11 @@
       </div>
       <el-row :gutter="15">
         <el-col :xl="4" :lg="6" :md="6" :sm="8">
-          <el-col class="input-name" :span="7">风采名称</el-col>
+          <el-col class="input-name" :span="7">发展年代</el-col>
           <el-col :span="17">
             <el-input
               placeholder="请输入关键字"
-              v-model="seacherParam.advertName"
+              v-model="seacherParam.advertTitle"
               @keyup.enter.native="seachFun"
             ></el-input>
           </el-col>
@@ -54,9 +54,8 @@
          
 
 
-          <el-table-column prop="advertName" label="风采名称"></el-table-column>
-          <el-table-column prop="advertTitle" label="风采标题"></el-table-column>
-          <el-table-column prop="advertSubtitle" label="风采副标题"></el-table-column>
+          <el-table-column prop="advertTitle" label="发展年代"></el-table-column>
+          <el-table-column prop="advertContent" label="发展简介"></el-table-column>
 
           <el-table-column label="启用状态">
             <template slot-scope="scope">
@@ -121,50 +120,11 @@
     >
       <div class="dialog-body-content">
 
-        
-        <el-row :gutter="15">
-          <el-col :span="8" class="content-left">
-            <label>风采主图</label>
-          </el-col>
-          <el-col :span="16" class="content-right">
-            <up-load-img ref="imgComponent" v-if="dialogType===1 || dialogType===2" width="266" height="175" resPath="banner"  :type="dialogType===2" :viewUrl="dialogBindData.advertPicUrl" @emitSuccess="handleImgLoad"></up-load-img>
-            <img v-view-img v-else :src="dialogBindData.advertPicUrl" width="266" height="175">
-          </el-col>
-        </el-row>
 
 
         <el-row :gutter="15">
           <el-col :span="8" class="content-left">
-            <label>风采详图</label>
-          </el-col>
-          <el-col :span="16" class="content-right">
-            <up-load-img ref="imgComponent1" v-if="dialogType===1 || dialogType===2" width="266" height="175" resPath="banner"  :type="dialogType===2" :viewUrl="dialogBindData.linkUrl" @emitSuccess="handleImgLoad1"></up-load-img>
-            <img v-view-img v-else :src="dialogBindData.linkUrl" width="266" height="175">
-          </el-col>
-        </el-row>
-
-
-
-        
-        <el-row :gutter="15">
-          <el-col :span="8" class="content-left">
-            <label>风采名称</label>
-          </el-col>
-          <el-col :span="16" class="content-right">
-            <el-input
-              v-if="dialogType===1 || dialogType===2"
-              size="small"
-              placeholder="请输入案例名称"
-              v-model="dialogBindData.advertName"
-            ></el-input>
-            <span v-else>{{dialogBindData.advertName}}</span>
-          </el-col>
-        </el-row>
-
-
-        <el-row :gutter="15">
-          <el-col :span="8" class="content-left">
-            <label>风采标题</label>
+            <label>发展年代</label>
           </el-col>
           <el-col :span="16" class="content-right">
             <el-input
@@ -177,28 +137,11 @@
           </el-col>
         </el-row>
 
-        <el-row :gutter="15">
-          <el-col :span="8" class="content-left">
-            <label>风采副标题</label>
-          </el-col>
-          <el-col :span="16" class="content-right">
-            <el-input
-              v-if="dialogType===1 || dialogType===2"
-              size="small"
-              type="textarea"
-              rows="3"
-              placeholder="请输入案例介绍"
-              resize="none"
-              v-model="dialogBindData.advertSubtitle"
-            ></el-input>
-            <span v-else>{{dialogBindData.advertSubtitle}}</span>
-          </el-col>
-        </el-row>
 
 
         <el-row :gutter="15">
           <el-col :span="8" class="content-left">
-            <label>风采详情</label>
+            <label>发展简介</label>
           </el-col>
           <el-col :span="16" class="content-right">
             <el-input
@@ -249,8 +192,8 @@ export default {
   data() {
     return {
       seacherParam: {
-        advertType:6,
-        advertName:'',
+        advertType:10,
+        advertTitle:'',
         isAvailable:''
       },
       isAvailableData: [{ code: 1, name: "启用" }, { code: 0, name: "未启用" }],
@@ -335,17 +278,13 @@ export default {
     submmitFun() {
      
       let param = {
-          advertName:this.dialogBindData.advertName,
           advertId:this.dialogBindData.advertId,
-          advertPicUrl:this.dialogBindData.advertPicUrl,
           advertTitle:this.dialogBindData.advertTitle,
-          advertSubtitle:this.dialogBindData.advertSubtitle,
           advertContent:this.dialogBindData.advertContent,
-          linkUrl:this.dialogBindData.linkUrl,
-          advertType:6
+          advertType:10
       };
       let isSubmitActive;
-      isSubmitActive = param.advertName && param.advertPicUrl&& param.linkUrl&& param.advertTitle && param.advertSubtitle && param.advertContent;
+      isSubmitActive = param.advertTitle && param.advertContent;
       if (isSubmitActive) {
         this.submmitSuccess = true;
         common.addOrEditAdvert(param).then(res => {
@@ -401,7 +340,7 @@ export default {
     // 获取表格数据
     getList(cb) {
       let param = {
-        advertType:6,
+        advertType:10,
         pageNo: this.pageNo,
         pageSize: this.pageSize
       };
@@ -440,7 +379,7 @@ export default {
       const param = {
         advertId: data.advertId,
         isAvailable: data.isAvailable ? 1 : 0,
-        advertType:6
+        advertType:10
       };
       common.addOrEditAdvert(param).then(res => {
         if (res.data.code === "1") {

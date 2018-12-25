@@ -136,7 +136,6 @@ export const asyncRouterMap = [
       icon: 'qiyewenhua'
     },
     children: [
-      { path: 'imges', component: _import('cpyCulture/imges'), name: 'cpyCulture_imges', meta: { title: '企业文化图库' } },
       { path: 'cpyConcept', component: _import('cpyCulture/cpyConcept'), name: 'cpyCulture_cpyConcept', meta: { title: '企业理念' } },
       { path: 'develop', component: _import('cpyCulture/develop'), name: 'cpyCulture_develop', meta: { title: '企业发展历程' } },
       { path: 'teamList', component: _import('cpyCulture/teamList'), name: 'cpyCulture_teamList', meta: { title: '团队风采' } }
