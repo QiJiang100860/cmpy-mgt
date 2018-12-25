@@ -101,7 +101,14 @@ export const asyncRouterMap = [
       icon: 'qiyefuwu'
     },
     children: [
-      { path: 'list', component: _import('service/list'), name: 'service_list', meta: { title: '企业服务列表' } },
+      { path: 'sMainPic', component: _import('service/sMainPic'), name: 'service_sMainPic', meta: { title: '企业服务形象图' } },
+      {
+        path: 'list', component: _import('service/list'), name: 'service_list', meta: { title: '企业服务列表' }
+      },
+
+
+
+
     ]
   },
   // 商务合作
@@ -130,7 +137,9 @@ export const asyncRouterMap = [
     },
     children: [
       { path: 'imges', component: _import('cpyCulture/imges'), name: 'cpyCulture_imges', meta: { title: '企业文化图库' } },
-      { path: 'teamList', component: _import('cpyCulture/teamList'), name: 'cpyCulture_teamList', meta: { title: '团队风采' } },
+      { path: 'cpyConcept', component: _import('cpyCulture/cpyConcept'), name: 'cpyCulture_cpyConcept', meta: { title: '企业理念' } },
+      { path: 'develop', component: _import('cpyCulture/develop'), name: 'cpyCulture_develop', meta: { title: '企业发展历程' } },
+      { path: 'teamList', component: _import('cpyCulture/teamList'), name: 'cpyCulture_teamList', meta: { title: '团队风采' } }
     ]
   },
 
